@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+  /* This maps your colors so you can use class="text-accent" or "bg-bg" */
+  --color-bg: #0f172a;
+  --color-accent: #06b6d4;
+  
+  /* Adding the other 'Chromaura' colors we discussed for the Hero section */
+  --color-chroma-header: #f3f4f6;
+  --color-chroma-text: #9ca3af;
+  --color-chroma-cyan: #00f2ff;
+  --color-chroma-purple: #bc13fe;
+  --color-chroma-border: #1e293b;
+
+  /* Custom Font (Optional: ensure you link it in index.html) */
+  --font-heading: "Plus Jakarta Sans", ui-sans-serif, system-ui;
+}
+
+/* Global Base Styles */
+@layer base {
+  body {
+    @apply bg-bg text-white antialiased;
+    /* This ensures your background uses the theme variable 
+       and text is smooth on Mac/Windows */
+  }
+
+  /* Selection color for that "Chromaura" feel when users highlight text */
+  ::selection {
+    @apply bg-accent/30 text-accent;
+  }
+}
