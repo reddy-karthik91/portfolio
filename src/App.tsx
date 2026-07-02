@@ -6,10 +6,11 @@ import SkillsBento from './features/skills/SkillsBento'
 import Projects from './features/projects/Projects'
 import Experience from './features/experience/Experience'
 import TechStack from './features/techstack/TechStack'
-import Testimonials from './features/testimonials/Testimonials'
-import Blog from './features/blog/Blog'
+// import Testimonials from './features/testimonials/Testimonials'
+// import Blog from './features/blog/Blog'
 import Contact from './features/contact/Contact'
 import Footer from './components/Footer'
+import CustomCursor from './components/CustomCursor'
 
 function App() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -24,11 +25,14 @@ function App() {
 
   return (
     <div className="relative min-h-screen bg-bg text-text-primary selection:bg-accent-green selection:text-bg overflow-x-hidden font-sans">
+      {/* Custom glowing cursor trail */}
+      <CustomCursor />
+
       {/* Noise Overlay */}
       <div className="noise-overlay" />
 
       {/* Spotlight cursor glow overlay */}
-      <div 
+      <div
         className="pointer-events-none fixed inset-0 z-30 opacity-100 hidden md:block"
         style={{
           background: `radial-gradient(600px at ${mousePosition.x}px ${mousePosition.y}px, rgba(168, 255, 53, 0.035), transparent 80%)`
@@ -36,7 +40,7 @@ function App() {
       />
 
       <Navbar />
-      
+
       {/* Grid container holding all sections */}
       <main className="max-w-7xl mx-auto border-x border-border shadow-2xl relative z-10 bg-bg">
         <Hero />
@@ -45,8 +49,8 @@ function App() {
         <Projects />
         <Experience />
         <TechStack />
-        <Testimonials />
-        <Blog />
+        {/* <Testimonials /> */}
+        {/* <Blog /> */}
         <Contact />
         <Footer />
       </main>

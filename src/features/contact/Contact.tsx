@@ -21,26 +21,67 @@ const Contact = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (name && email && message) {
-      setSubmitted(true);
-      setTimeout(() => {
-        setSubmitted(false);
+    if (!name || !email || !message) return;
+
+    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+    if (!accessKey) {
+      console.error("Web3Forms Access Key is missing in environment variables.");
+      setSubmitError("Web3Forms API key is missing. Please add VITE_WEB3FORMS_ACCESS_KEY to your .env file.");
+      return;
+    }
+
+    setIsSending(true);
+    setSubmitError(null);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: accessKey,
+          name,
+          email,
+          message,
+          subject: `New Portfolio Message from ${name}`,
+          from_name: "Portfolio Contact Form",
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        setSubmitted(true);
         setName('');
         setEmail('');
         setMessage('');
-      }, 5000);
+        setTimeout(() => {
+          setSubmitted(false);
+        }, 5000);
+      } else {
+        setSubmitError(result.message || "Failed to transmit message. Please try again.");
+      }
+    } catch (err) {
+      console.error("Error submitting contact form:", err);
+      setSubmitError("A network error occurred. Please check your connection and try again.");
+    } finally {
+      setIsSending(false);
     }
   };
 
   return (
     <section id="contact" className="py-24 bg-bg border-t border-border bg-grid">
       <div className="container mx-auto px-6">
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-5xl mx-auto items-stretch">
-          
+
           {/* Left: Contact Info (5 Columns) */}
           <div className="lg:col-span-5 p-8 bg-surface border border-border rounded-[28px] flex flex-col justify-between shadow-xl">
             <div className="space-y-6">
@@ -56,18 +97,18 @@ const Contact = () => {
             <div className="space-y-8 mt-12">
               {/* Direct Links */}
               <div className="space-y-3 font-mono text-[10px] text-text-secondary">
-                <a 
-                  href="mailto:karthik@example.com" 
+                <a
+                  href="mailto:reddykarthik2491@gmail.com"
                   className="flex items-center gap-3 hover:text-accent-green transition-colors group"
                 >
                   <div className="flex h-7 w-7 items-center justify-center border border-border bg-bg text-text-secondary group-hover:border-accent-green/30 transition-colors rounded-sm">
                     <Mail size={12} />
                   </div>
-                  <span>karthik@example.com</span>
+                  <span>reddykarthik2491@gmail.com</span>
                 </a>
-                <a 
-                  href="https://github.com" 
-                  target="_blank" 
+                <a
+                  href="https://github.com/reddy-karthik91"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 hover:text-accent-green transition-colors group"
                 >
@@ -76,16 +117,16 @@ const Contact = () => {
                   </div>
                   <span>github.com/reddy-karthik91</span>
                 </a>
-                <a 
-                  href="https://linkedin.com" 
-                  target="_blank" 
+                <a
+                  href="https://linkedin.com/in/reddy-karthik91"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 hover:text-accent-green transition-colors group"
                 >
                   <div className="flex h-7 w-7 items-center justify-center border border-border bg-bg text-text-secondary group-hover:border-accent-green/30 transition-colors rounded-sm">
                     <LinkedinIcon size={12} />
                   </div>
-                  <span>linkedin.com/in/reddykarthik</span>
+                  <span>linkedin.com/in/reddy-karthik91</span>
                 </a>
               </div>
 
@@ -111,17 +152,17 @@ const Contact = () => {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
-                
+
                 {/* Inputs block */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  
+
                   {/* Name */}
                   <div className="space-y-2">
                     <label htmlFor="name" className="block font-mono text-[10px] uppercase tracking-wider text-text-secondary">
                       // NAME
                     </label>
-                    <input 
-                      type="text" 
+                    <input
+                      type="text"
                       id="name"
                       required
                       value={name}
@@ -136,8 +177,8 @@ const Contact = () => {
                     <label htmlFor="email" className="block font-mono text-[10px] uppercase tracking-wider text-text-secondary">
                       // EMAIL
                     </label>
-                    <input 
-                      type="email" 
+                    <input
+                      type="email"
                       id="email"
                       required
                       value={email}
@@ -154,7 +195,7 @@ const Contact = () => {
                   <label htmlFor="message" className="block font-mono text-[10px] uppercase tracking-wider text-text-secondary">
                     // TRANSMISSION BODY
                   </label>
-                  <textarea 
+                  <textarea
                     id="message"
                     required
                     rows={5}
@@ -165,13 +206,28 @@ const Contact = () => {
                   />
                 </div>
 
+                {/* Submit Error Message */}
+                {submitError && (
+                  <div className="p-4 border border-red-500/20 bg-red-500/10 text-red-400 font-sans text-xs rounded-xl flex flex-col gap-1">
+                    <span className="font-mono text-[10px] font-bold text-red-500 uppercase tracking-wider">// TRANSMISSION ERROR</span>
+                    <p>{submitError}</p>
+                    <p className="mt-1 text-[10px] opacity-80">
+                      Alternatively, you can email directly at{" "}
+                      <a href="mailto:reddykarthik91@icloud.com" className="underline hover:text-white transition-colors">
+                        reddykarthik91@icloud.com
+                      </a>.
+                    </p>
+                  </div>
+                )}
+
                 {/* Submit button */}
-                <button 
+                <button
                   type="submit"
-                  className="cursor-pointer w-full inline-flex items-center justify-center gap-2 bg-accent-green text-bg px-6 py-3.5 text-xs font-mono font-bold uppercase tracking-wider rounded-full hover:bg-white hover:text-bg hover:scale-[1.01] transition-all duration-300 active:scale-95 shadow-[0_0_30px_rgba(168,255,53,0.15)] hover:shadow-none"
+                  disabled={isSending}
+                  className="cursor-pointer w-full inline-flex items-center justify-center gap-2 bg-accent-green text-bg px-6 py-3.5 text-xs font-mono font-bold uppercase tracking-wider rounded-full hover:bg-white hover:text-bg hover:scale-[1.01] transition-all duration-300 active:scale-95 shadow-[0_0_30px_rgba(168,255,53,0.15)] hover:shadow-none disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:bg-accent-green disabled:hover:text-bg"
                 >
-                  <span>Transmit Transmission</span>
-                  <Send size={12} />
+                  <span>{isSending ? "Transmitting..." : "Transmit Transmission"}</span>
+                  <Send size={12} className={isSending ? "animate-pulse" : ""} />
                 </button>
 
               </form>
