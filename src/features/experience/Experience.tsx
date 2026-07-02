@@ -11,28 +11,40 @@ interface Position {
 
 const experienceData: Position[] = [
   {
-    period: "DEC 2023 — PRESENT",
-    role: "Software Engineer II",
-    company: "Systemic Solutions Ltd",
-    location: "Bengaluru, IN",
+    period: "FEB 2025 — MAR 2026",
+    role: "Jr Angular Developer",
+    company: "GVienn Consultancy Private Ltd",
+    location: "Visakhapatnam, IN",
     highlights: [
-      "Architected a modular component library using React 19 and custom utility tokens, resulting in a 40% reduction in code duplicates.",
-      "Optimized client rendering speeds by implementing layout viewport checks and lazy-loaded components, boosting Core Web Vitals (LCP) by 25%.",
-      "Mentored junior engineers and designed internal workshop guidelines regarding modular React design patterns."
+      "Developed and maintained responsive enterprise web applications using Angular 17, TypeScript, and Angular Material in a microfrontend architecture.",
+      "Built reusable components, reactive forms, and API integrations while improving application performance through lazy loading, route optimization, and efficient state management.",
+      "Collaborated with cross-functional teams to fix production issues, implement new features, participate in code reviews, and deliver releases in an Agile environment."
     ],
-    skills: ["React 19", "TypeScript", "Performance Tuning", "Vite", "Framer Motion"]
+    skills: ["Angular 17", "TypeScript", "Akita", "Angular Material", "Jest"]
   },
   {
-    period: "NOV 2021 — DEC 2023",
-    role: "Frontend Engineer",
-    company: "Vector Networks",
-    location: "Bengaluru, IN",
+    period: "OCT 2024 — FEB 2025",
+    role: "Technical Translator/Software Instructor",
+    company: "Guvi Geek Networks",
+    location: "Visakhapatnam, IN",
     highlights: [
-      "Engineered real-time telemetry dashboard interfaces with WebSocket communication, tracking up to 5,000 active node payloads per second.",
-      "Replaced standard heavy UI dependencies with lightweight native CSS/JS custom modules, trimming final bundle payload sizes by 45KB.",
-      "Ensured pixel-perfect alignment across multiple viewport scales utilizing CSS grid layouts and clean media queries."
+      "Translated technical course content from English to Telugu, ensuring clarity, technical accuracy, and accessibility for regional learners.",
+      "Delivered programming sessions covering frontend and backend development concepts, helping learners build a strong foundation in web technologies.",
+      "Reviewed educational content, resolved technical inconsistencies, and collaborated with content teams to improve course quality and learner experience."
     ],
-    skills: ["React", "JavaScript", "WebSockets", "CSS Grid", "TailwindCSS", "PostCSS"]
+    skills: ["Python", "JavaScript", "Next.JS", "Flask", "TailwindCSS"]
+  },
+  {
+    period: "APR 2021 — OCT 2024",
+    role: "Software Developer",
+    company: "OOPS Info Solutions Private Ltd",
+    location: "Visakhapatnam, IN",
+    highlights: [
+      "Developed and maintained enterprise web applications using Angular, TypeScript, RxJS, and Angular Material, delivering scalable and responsive user interfaces.",
+      "Built reusable components, implemented reactive forms, integrated REST APIs, and optimized application performance through lazy loading and efficient state management.",
+      "Collaborated with cross-functional teams in an Agile environment to implement new features, resolve production issues, participate in code reviews, and ensure timely project delivery."
+    ],
+    skills: ["Angular", "React.JS", "Python", "Node.JS", "TailwindCSS"]
   }
 ];
 
@@ -40,7 +52,7 @@ const Experience = () => {
   return (
     <section id="experience" className="py-24 bg-bg border-t border-border bg-dots">
       <div className="container mx-auto px-6">
-        
+
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <div className="space-y-3">
@@ -68,7 +80,7 @@ const Experience = () => {
 
               {/* Timeline Card */}
               <div className="p-6 md:p-8 bg-surface border border-border hover:border-accent-green/10 transition-colors rounded-[24px] shadow-xl">
-                
+
                 {/* Meta details */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6 font-mono">
                   <span className="text-[10px] text-accent-green uppercase tracking-widest font-semibold flex items-center gap-1">
@@ -99,7 +111,7 @@ const Experience = () => {
                     Skills:
                   </span>
                   {job.skills.map((skill) => (
-                    <span 
+                    <span
                       key={skill}
                       className="font-mono text-[9px] text-text-secondary bg-bg px-2.5 py-1 border border-border/60 rounded-full"
                     >

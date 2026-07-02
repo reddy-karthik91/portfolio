@@ -76,7 +76,7 @@ const Hero = () => {
                 Active now
               </span>
               <span className="font-mono text-[9px] text-text-secondary flex items-center gap-1">
-                <Compass size={10} /> Bengaluru, IN
+                <Compass size={10} /> Visakhapatnam, IN
               </span>
             </div>
 
@@ -100,13 +100,13 @@ const Hero = () => {
           {/* Socials & Meta */}
           <div className="mt-8 pt-6 border-t border-border flex items-center justify-between font-mono text-[10px] text-text-secondary">
             <div className="flex items-center gap-4">
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-accent-green transition-colors">
+              <a href="https://github.com/reddy-karthik91" target="_blank" rel="noopener noreferrer" className="hover:text-accent-green transition-colors">
                 <GithubIcon size={14} />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-accent-green transition-colors">
+              <a href="https://www.linkedin.com/in/reddy-karthik91/" target="_blank" rel="noopener noreferrer" className="hover:text-accent-green transition-colors">
                 <LinkedinIcon size={14} />
               </a>
-              <a href="mailto:karthik@example.com" className="hover:text-accent-green transition-colors">
+              <a href="mailto:reddykarthik2491@gmail.com" className="hover:text-accent-green transition-colors">
                 <Mail size={14} />
               </a>
             </div>
