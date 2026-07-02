@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowUpRight, Heart, Palette, ChefHat, ShoppingBag, FileSearch } from 'lucide-react';
+import { ArrowUpRight, Heart, Palette, ChefHat, FileSearch } from 'lucide-react';
 
 interface Project {
   id: string;
