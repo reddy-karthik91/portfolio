@@ -1,6 +1,6 @@
 import { motion, type Variants } from 'framer-motion';
 import { Mail, Compass, ShieldCheck, ArrowRight, ArrowDown } from 'lucide-react';
-import profilePic from '../../assets/profile-picture.png';
+import profilePic from '../../assets/reddy_karthik.png';
 
 // Inline SVGs to avoid package version issues
 const GithubIcon = ({ size = 14 }: { size?: number }) => (
